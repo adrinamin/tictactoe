@@ -1,7 +1,7 @@
 
 {
 	"name": "Node.js & TypeScript",
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:${templateOption:imageVariant}"
+	"image": "mcr.microsoft.com/devcontainers/typescript-node"
 
 	// Features to add to the dev container. More info: https://containers.dev/implementors/features.
 	// "features": {},
