@@ -1,7 +1,7 @@
 
 {
-	"name": "Node.js & TypeScript",
-	"image": "mcr.microsoft.com/devcontainers/typescript-node"
+	"name": "Devcontainer for React App",
+	"image": "Dockerfile"
 
 	// Features to add to the dev container. More info: https://containers.dev/implementors/features.
 	// "features": {},
