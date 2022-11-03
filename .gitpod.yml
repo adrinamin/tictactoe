@@ -1,0 +1,15 @@
+
+tasks:
+  - name: Setup & Build
+    before: npm install
+    init: npm start
+
+ports:
+  - port: 3000
+    onOpen: open-preview
+    name: React App
+vscode:
+  extensions:
+    - ms-azuretools.vscode-docker
+    - mintlify.document
+    - TabNine.tabnine-vscode
