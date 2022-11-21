@@ -1,56 +1,7 @@
-import React, { Component } from 'react';
+import { Component } from "react";
+import { Board } from "./components/Boards/Board";
+import { MoveHistory } from "./components/MoveHistory/MoveHistory";
 import './App.css';
-
-interface SquareProps {
-  value: string;
-  onClick: () => void;
-}
-
-function Square(props: SquareProps): JSX.Element {
-  return (
-    <button 
-      className="square" 
-      onClick={props.onClick}>
-      {props.value}
-    </button>
-  );
-}
-
-interface BoardProps {
-  squares: string[],
-  onClick: (i: number) => void,
-}
-
-class Board extends Component<BoardProps, {}> {
-
-  private renderSquare(i : number) : JSX.Element {
-    return <Square 
-            value={this.props.squares[i]}
-            onClick={() => this.props.onClick(i)} />;
-  }
-
-  render() {
-    return (
-      <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
-    );
-  }
-}
 
 interface GameState {
   history: { squares: string[] }[],
@@ -72,6 +23,8 @@ class Game extends Component<{}, GameState> {
       stepNumber: 0,
       xIsNext: true,
     };
+
+    this.jumpTo = this.jumpTo.bind(this);
   }
 
   private handleClick(i : any) : void {
@@ -101,17 +54,6 @@ class Game extends Component<{}, GameState> {
     const current = history[this.state.stepNumber];  
     const winner = calculateWinner(current.squares);
     
-    const moves = history.map((step, move) => {      
-      const desc = move ?        
-      'Go to move #' + move :        
-      'Go to game start';      
-      return (        
-        <li key={move}>          
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>        
-        </li>      
-      );    
-    });
-    
     let status;    
     if (winner) {      
       status = 'Winner: ' + winner;    
@@ -127,7 +69,7 @@ class Game extends Component<{}, GameState> {
         </div>
         <div className="game-info">
           <div>{status}</div>          
-          <ol>{moves}</ol>
+          <MoveHistory history={history} jumpTo={this.jumpTo}/>
         </div>
       </div>
     );
